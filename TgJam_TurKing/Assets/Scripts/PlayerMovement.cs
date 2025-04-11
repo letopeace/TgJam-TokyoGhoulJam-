@@ -52,24 +52,34 @@ public class PlayerMovement : MonoBehaviour
         dir = dir * speed * Time.fixedDeltaTime;
         dir.y = rb.velocity.y * 1.01f;
 
+        //rb.velocity = Vector3.Lerp(rb.velocity, dir, 0.1f);
         rb.velocity = dir;
     }
 
     private void MoveOnWall()
     {
+        if (!onWall)
+        { return; }
+
         rb.useGravity = false;
+
+        Vector3 wallRight = Vector3.Cross(Vector3.up, wallNormal).normalized;
+        Vector3 wallLeft = -wallRight;
+
         Vector3 camForward = Camera.main.transform.forward;
+        Vector3 projectedView = Vector3.ProjectOnPlane(camForward, wallNormal).normalized;
 
-        // Вычисляем движение по стене
-        Vector3 wallMoveDir = Vector3.ProjectOnPlane(camForward, wallNormal).normalized;
+        Vector3 wallRunDirection =
+            Vector3.Dot(projectedView, wallRight) > 0 ? wallRight : wallLeft;
 
-        float verticalInfluence = Mathf.Clamp(Camera.main.transform.forward.y, -1f, 1f);
+
+        float verticalInfluence = Mathf.Clamp(camForward.y, -0.3f, 0.3f);
         if (timeOnWall < 0)
         {
             verticalInfluence = -1f;
         }
 
-        Vector3 finalVelocity = wallMoveDir * speed * Time.fixedDeltaTime + Vector3.up * verticalInfluence * wallRunClimbSpeed;
+        Vector3 finalVelocity = wallRunDirection * speed * Time.fixedDeltaTime + Vector3.up * verticalInfluence * wallRunClimbSpeed;
         finalVelocity.y = Mathf.Clamp(finalVelocity.y, -maxSlideSpeed, maxClimbSpeed);
 
         rb.velocity = finalVelocity;
@@ -85,8 +95,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 onWall = false;
                 timeOnWall = timeOnWallMax;
-                Vector3 dir = wallNormal + Vector3.up;
-                rb.velocity = dir * jumpForce * 3;
+                Vector3 dir = wallNormal * 2 + Vector3.up;
+                rb.velocity = dir * jumpForce * 2;
             }
             else
             {
@@ -104,17 +114,18 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         onGround = false;
-        onWall = false;
 
         ContactPoint[] contacts = collision.contacts;
         for (int i = 0; i < contacts.Length; i++)
         {
-            if (contacts[i].normal.y > 0.66f) 
+            if (contacts[i].normal.y > 0.66f && !onGround) 
             {
                 onGround = true;
                 timeOnWall = timeOnWallMax;
+                wallNormal = Vector3.zero;
+                onWall = false;
             }
-            else if (contacts[i].normal.y > -0.66f)
+            else if (contacts[i].normal.y > -0.66f && !onWall && wallNormal != contacts[i].normal)
             {
                 onWall = true;
                 wallNormal = contacts[i].normal;
