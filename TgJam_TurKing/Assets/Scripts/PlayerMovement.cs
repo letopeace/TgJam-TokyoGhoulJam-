@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
         float verticalInfluence = Mathf.Clamp(Camera.main.transform.forward.y, -1f, 1f);
 
-        Vector3 finalVelocity = wallMoveDir * speed + Vector3.up * verticalInfluence * wallRunClimbSpeed;
+        Vector3 finalVelocity = wallMoveDir * speed * Time.fixedDeltaTime + Vector3.up * verticalInfluence * wallRunClimbSpeed;
         finalVelocity.y = Mathf.Clamp(finalVelocity.y, -maxSlideSpeed, maxClimbSpeed);
 
         rb.velocity = finalVelocity;
