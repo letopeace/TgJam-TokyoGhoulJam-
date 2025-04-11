@@ -28,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Jump();
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f));
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit);
+        Debug.DrawRay(hit.point, hit.normal);
+        Debug.Log(hit.normal);
     }
 
     private void FixedUpdate()
