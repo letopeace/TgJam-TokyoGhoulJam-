@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 wallNormal;
+    private float timeOnWallMax = 1.5f;
+    public float timeOnWall = 1.5f;
 
 
     private void Awake()
@@ -62,25 +64,42 @@ public class PlayerMovement : MonoBehaviour
         Vector3 wallMoveDir = Vector3.ProjectOnPlane(camForward, wallNormal).normalized;
 
         float verticalInfluence = Mathf.Clamp(Camera.main.transform.forward.y, -1f, 1f);
+        if (timeOnWall < 0)
+        {
+            verticalInfluence = -1f;
+        }
 
         Vector3 finalVelocity = wallMoveDir * speed * Time.fixedDeltaTime + Vector3.up * verticalInfluence * wallRunClimbSpeed;
         finalVelocity.y = Mathf.Clamp(finalVelocity.y, -maxSlideSpeed, maxClimbSpeed);
 
         rb.velocity = finalVelocity;
+
+        timeOnWall -= Time.deltaTime;
     }
 
     private void Jump()
     {
-        if (onGround && Input.GetKeyDown(KeyCode.Space))
+        if ((onGround || onWall) && Input.GetKeyDown(KeyCode.Space))
         {
-            Vector3 dir = transform.up + Vector3.up;
-            rb.velocity = dir * jumpForce;
+            if (onWall)
+            {
+                onWall = false;
+                timeOnWall = timeOnWallMax;
+                Vector3 dir = wallNormal + Vector3.up;
+                rb.velocity = dir * jumpForce * 3;
+            }
+            else
+            {
+                Vector3 dir = Vector3.up * 2;
+                rb.velocity = dir * jumpForce;
+            }
         }
+
     }
 
 
 
-    
+
 
     private void OnCollisionStay(Collision collision)
     {
@@ -93,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
             if (contacts[i].normal.y > 0.66f) 
             {
                 onGround = true;
+                timeOnWall = timeOnWallMax;
             }
             else if (contacts[i].normal.y > -0.66f)
             {
