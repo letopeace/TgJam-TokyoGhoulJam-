@@ -982,8 +982,8 @@ MonoBehaviour:
   distance: 0
   shootCd: 2
   attackCd: 1.5
-  attackKnocking: 20
-  player: {fileID: 0}
+  attackKnocking: 0
+  mainCamera: {fileID: 0}
   playerAttack: {fileID: 0}
   rb: {fileID: 5232305617167018279}
   animator: {fileID: 8270725354826223880}
@@ -991,7 +991,7 @@ MonoBehaviour:
     type: 3}
   staned: 0
   magicCost: 1
-  minDistance: 3
+  minDistance: 0
 --- !u!136 &638319661140670427
 CapsuleCollider:
   m_ObjectHideFlags: 0

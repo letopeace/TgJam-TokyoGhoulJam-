@@ -41,12 +41,10 @@ public class FioletovyiChert : BaseEnemy
 
 		if (Physics.Raycast(ray, out hit, rayDistance))
 		{
-			Debug.Log("Мы попали в: " + hit.collider.name);
 			return true;
 		}
 		else
 		{
-			Debug.Log("Ничего не найдено");
 			return false;
 		}
 	}

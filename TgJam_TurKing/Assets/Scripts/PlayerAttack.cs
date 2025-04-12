@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public int maxHP;
     public int hp;
     public float damage;
+    public float damageIncrease = 10;
     public float attackColdown;
     public float microColdown;
     public Vector3 AttackZoneSize;
@@ -43,8 +44,7 @@ public class PlayerAttack : MonoBehaviour
 
         }
 
-
-        if (isAttacking) Attack();
+		if (isAttacking) Attack();
 
         if (canAttack)
             cdTime += Time.deltaTime;
@@ -80,7 +80,10 @@ public class PlayerAttack : MonoBehaviour
         {
             if (hit[i]!=null && hit[i].gameObject.GetComponent<BaseEnemy>() != null)
             {
-                hit[i].gameObject.GetComponent<BaseEnemy>().Damaged((int)damage);
+                float speed = movement.rb.velocity.magnitude;
+                float boost = (speed - 15) * 0.5f;
+				boost = (boost / (1 + Mathf.Abs(boost))) * damageIncrease; 
+				hit[i].gameObject.GetComponent<BaseEnemy>().Damaged((int)(damage + boost));
                 isAttacking = false;
             }
         }
@@ -89,7 +92,6 @@ public class PlayerAttack : MonoBehaviour
     public void Damaged(int damage)
     {
         hp -= damage;
-        Debug.Log("Damaged, hp: " + hp);
         if (hp < 0f)
         {
             Death();

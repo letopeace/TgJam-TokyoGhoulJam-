@@ -105,7 +105,7 @@ public class BaseEnemy : MonoBehaviour
     public void Damaged(int damage)
     {
         hp -= damage;
-        Debug.Log(damage);
+        Debug.Log("It is hurt such as: " + damage);
         if (hp < 0)
         {
             Death();

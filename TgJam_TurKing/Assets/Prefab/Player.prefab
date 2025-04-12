@@ -1862,9 +1862,10 @@ MonoBehaviour:
   maxHP: 6
   hp: 6
   damage: 20
+  damageIncrease: 10
   attackColdown: 0.3
   microColdown: 0.02
-  AttackZoneSize: {x: 2.32, y: 0.55, z: 1}
+  AttackZoneSize: {x: 2.32, y: 0.55, z: 3}
   AttackZoneOrigin: {x: 0, y: -0.38, z: 0}
   AttackZoneRange: 4
   isAttacking: 0
