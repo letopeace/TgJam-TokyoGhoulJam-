@@ -11,6 +11,7 @@ public class BaseEnemy : MonoBehaviour
     public Rigidbody rb;
     public Animator animator;
     public EnemyState currentState, previousState;
+    public GameObject DeadEffect;
 
     protected float currentShootCd = 3, currentAttackCd = 1.5f;
 
@@ -90,6 +91,7 @@ public class BaseEnemy : MonoBehaviour
     public void Damaged(int damage)
     {
         hp -= damage;
+        Debug.Log(damage);
         if (hp < 0)
         {
             Death();
@@ -101,7 +103,8 @@ public class BaseEnemy : MonoBehaviour
 
     public void Death()
     {
-        Debug.Log(name + " was Dead!");
+        //Debug.Log(name + " was Dead!");
+        Instantiate(DeadEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -121,6 +124,6 @@ public class BaseEnemy : MonoBehaviour
 
     public void DebugLog(string text)
     {
-        Debug.Log(name + " was set state: " + text);    
+        //Debug.Log(name + " was set state: " + text);    
     }
 }
