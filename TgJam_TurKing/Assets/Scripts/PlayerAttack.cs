@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] Animator anim;
 
-    private string[] clipNames = { "PlayerAttact1", "PlayerAttact2", "PlayerAttact3" };
+    private string[] clipNames = { "PlayerAttact1", "PlayerAttact2", "PlayerAttact3" },;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && canAttack) Attack(); 
