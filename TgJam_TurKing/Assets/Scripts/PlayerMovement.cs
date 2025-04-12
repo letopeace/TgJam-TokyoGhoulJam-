@@ -72,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
         float v = Input.GetAxis("Vertical");
 
         Vector3 dir = Vector3.ClampMagnitude((transform.right * h + transform.forward * v), 1f);
-        dir = dir * Time.fixedDeltaTime * speed  +  dashDirection * dashForce * (nowDashingTime/dashingTime) * (nowDashingTime/dashingTime);
         dir = dir * Time.fixedDeltaTime * speed * TumarPower  +  dashDirection * dashForce * (nowDashingTime/dashingTime) * (nowDashingTime/dashingTime) * TumarPower;
         if(dir.y == 0f) dir.y = rb.velocity.y;
 
