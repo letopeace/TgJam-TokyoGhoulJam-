@@ -12,6 +12,7 @@ public class BaseEnemy : MonoBehaviour
     public Animator animator;
     public EnemyState currentState, previousState;
     public GameObject DeadEffect;
+    public bool staned = false;
 
     protected float currentShootCd = 3, currentAttackCd = 1.5f;
 

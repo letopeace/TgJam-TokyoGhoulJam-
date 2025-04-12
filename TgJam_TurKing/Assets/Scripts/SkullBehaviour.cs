@@ -27,7 +27,7 @@ public class SkullBehaviour : BaseEnemy
     public override void Follow()
     {
         transform.LookAt(player.position, Vector3.up);
-        rb.velocity = transform.forward * speed * Time.deltaTime;
+        if(!staned) rb.velocity = transform.forward * speed * Time.deltaTime;
     }
 
 
