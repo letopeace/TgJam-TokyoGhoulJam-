@@ -1825,7 +1825,7 @@ GameObject:
   - component: {fileID: 5117042605985673877}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1864,9 +1864,9 @@ MonoBehaviour:
   damage: 20
   attackColdown: 0.3
   microColdown: 0.02
-  AttackZoneSize: {x: 0, y: 0, z: 0}
-  AttackZoneOrigin: {x: 0, y: 0, z: 0}
-  AttackZoneRange: 0
+  AttackZoneSize: {x: 2.32, y: 0.55, z: 1}
+  AttackZoneOrigin: {x: 0, y: -0.38, z: 0}
+  AttackZoneRange: 4
   isAttacking: 0
   comboNumber: 0
   canAttack: 1
@@ -1911,6 +1911,7 @@ MonoBehaviour:
   rb: {fileID: 6475983840476326677}
   timeOnWallMax: 1.8
   timeOnWall: 1.8
+  isEverGrounded: 1
 --- !u!114 &3319912240912372095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1988,7 +1989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293df6876be29074c9089bb8e0e74e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicCharges: 0
+  magicCharges: 2
   magicProgress: 0
   maxCharges: 2
   magic: {fileID: 4679363632474542588, guid: a7ea9dcb46ebca849a1075ace2c59e0f, type: 3}
@@ -2044,6 +2045,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451141063700973944}
   - component: {fileID: 2636362956417767434}
+  - component: {fileID: 4134956961060915197}
   m_Layer: 6
   m_Name: playerArms
   m_TagString: Untagged
@@ -2089,6 +2091,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4134956961060915197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7734224670125614055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2cb5a76fb698fc469dab95488adde96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMagic: {fileID: 5117042605985673877}
 --- !u!1 &7987870798297006348
 GameObject:
   m_ObjectHideFlags: 0

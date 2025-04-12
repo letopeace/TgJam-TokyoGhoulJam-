@@ -24,7 +24,7 @@ public class FioletovyiChert : BaseEnemy
 	{
 		if (PlatformDetect())
 		{
-			Vector3 directionAwayFromPlayer = transform.position - player.position;
+			Vector3 directionAwayFromPlayer = transform.position - mainCamera.position;
 			directionAwayFromPlayer.y = 0f;
 			transform.rotation = Quaternion.LookRotation(directionAwayFromPlayer, Vector3.up);
 

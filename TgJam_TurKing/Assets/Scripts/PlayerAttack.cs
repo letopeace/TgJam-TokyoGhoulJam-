@@ -53,6 +53,7 @@ public class PlayerAttack : MonoBehaviour
 
     void AnimAttack()
     {
+        
         if (cdTime > 0.1f)
             comboNumber = 0;
         cdTime = 0;
@@ -73,13 +74,13 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack()
     {
-        RaycastHit[] hit;
-        hit = Physics.BoxCastAll(Camera.main.transform.position + AttackZoneOrigin,AttackZoneSize, Camera.main.transform.forward, Camera.main.transform.rotation);
+        Collider[] hit;
+        hit = Physics.OverlapBox(Camera.main.transform.position + AttackZoneOrigin, AttackZoneSize, Camera.main.transform.rotation);
         for(int i=0; i < hit.Length; i++)
         {
-            if (hit[i].collider!=null && hit[i].collider.gameObject.GetComponent<BaseEnemy>() != null)
+            if (hit[i]!=null && hit[i].gameObject.GetComponent<BaseEnemy>() != null)
             {
-                hit[i].collider.gameObject.GetComponent<BaseEnemy>().Damaged((int)damage);
+                hit[i].gameObject.GetComponent<BaseEnemy>().Damaged((int)damage);
                 isAttacking = false;
             }
         }

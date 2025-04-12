@@ -26,7 +26,7 @@ public class SkullBehaviour : BaseEnemy
 
     public override void Follow()
     {
-        transform.LookAt(player.position, Vector3.up);
+        transform.LookAt(mainCamera.position, Vector3.up);
         if(!staned) rb.velocity = transform.forward * speed * Time.deltaTime;
     }
 
@@ -45,7 +45,7 @@ public class SkullBehaviour : BaseEnemy
 
     private void OnCollisionEnter(Collision collision)
     {
-        Vector3 dir = player.position - transform.position;
+        Vector3 dir = mainCamera.position - transform.position;
         dir.Normalize();
 
         playerAttack.Damaged((int)damage);

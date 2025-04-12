@@ -6,7 +6,7 @@ public class BaseEnemy : MonoBehaviour
 {
     public float hp = 30, speed = 10, damage = 1, DetectFarDistance = 30, DetectDistance = 10, DetectNearDistance = 3, distance;
     public float shootCd = 3, attackCd = 1.5f, attackKnocking = 2f;
-    public Transform player;
+    public Transform mainCamera;
     public PlayerAttack playerAttack;
     public Rigidbody rb;
     public Animator animator;
@@ -17,14 +17,23 @@ public class BaseEnemy : MonoBehaviour
 
     protected float currentShootCd = 3, currentAttackCd = 1.5f;
 
-    public void SetState(EnemyState state)
+	public void SetState(EnemyState state)
     {
         currentState?.Exit(this);
         currentState = state;
         currentState.Enter(this);
     }
 
-    public void Update()
+	private void OnEnable()
+	{
+        if (mainCamera == null)
+		mainCamera = Camera.main.transform;
+
+        if(playerAttack == null)
+        playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+	}
+
+	public void Update()
     {
         currentShootCd -= Time.deltaTime;
         currentAttackCd -= Time.deltaTime;
@@ -37,22 +46,22 @@ public class BaseEnemy : MonoBehaviour
 
     public bool FarDetect()
     {
-        return (player.position - transform.position).magnitude < DetectFarDistance && CheckObstacle() && !Detect() && !Near();
+        return (mainCamera.position - transform.position).magnitude < DetectFarDistance && CheckObstacle() && !Detect() && !Near();
     }
     public bool Detect()
     {
-        distance = (player.position - transform.position).magnitude;
-        return (player.position - transform.position).magnitude < DetectDistance && CheckObstacle() && !Near();
+        distance = (mainCamera.position - transform.position).magnitude;
+        return (mainCamera.position - transform.position).magnitude < DetectDistance && CheckObstacle() && !Near();
     }
 
     public bool Near()
     {
-        return (player.position - transform.position).magnitude < DetectNearDistance && CheckObstacle();
+        return (mainCamera.position - transform.position).magnitude < DetectNearDistance && CheckObstacle();
     }
 
     private bool CheckObstacle()
     {
-        return IsBlocked(transform, player);
+        return IsBlocked(transform, mainCamera);
     }
 
     public virtual void Shoot()
@@ -78,14 +87,14 @@ public class BaseEnemy : MonoBehaviour
 
     public void Knocking()
     {
-        Vector3 dir = player.position - transform.position;
+        Vector3 dir = mainCamera.position - transform.position;
         dir.Normalize();
         playerAttack.Knock(dir * attackKnocking);
     }
 
     public virtual void Follow()
     {
-        Vector3 lookPos = player.position;
+        Vector3 lookPos = mainCamera.position;
         lookPos.y = transform.position.y;
         transform.LookAt(lookPos);
         Vector3 move = transform.forward * speed * Time.deltaTime;
