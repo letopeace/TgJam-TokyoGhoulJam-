@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 50cf67fdd7ee23f4b9d529e8ebd63f4a
+guid: 8da1ed7ae6a30e446b6dca15e96c3c85
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,7 +121,49 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: UIIcon_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 21
+        width: 203
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b487b1ab5eb028b4394b815251ba0f3b
+      internalID: 1150386920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIIcon_1
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 148
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b720f2f0aa2a19c4882c6ee37dc29b5b
+      internalID: -989046254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +174,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UIIcon_0: 1150386920
+      UIIcon_1: -989046254
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

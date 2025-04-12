@@ -37,7 +37,7 @@ public class PlayerMagic : MonoBehaviour
         for(int i = 0; i < 5; i++)
         {
             if (i < magicProgress && magicRecording[i].localScale != Vector3.one) magicRecording[i].DOScale(Vector3.one, 1f).SetEase(Ease.InExpo);
-            //else if (i >= magicProgress && magicRecording[i].loc)
+            else if (i >= magicProgress && magicRecording[i].localScale != Vector3.zero) magicRecording[i].DOScale(Vector3.zero, 1f).SetEase(Ease.InExpo);
         }
     }
 
@@ -46,7 +46,6 @@ public class PlayerMagic : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) AnimMagic();
         DisplayIcon();
     }
-
     void AnimMagic()
     {
         if(magicCharges != 0)
