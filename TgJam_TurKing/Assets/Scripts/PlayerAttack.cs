@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     public bool canAttack = true;
 
     [SerializeField] Animator anim;
+    [SerializeField] PlayerMovement movement;
 
     private string[] clipNames = { "PlayerAttact1", "PlayerAttact2", "PlayerAttact3" };
     private void Update()
@@ -44,6 +45,14 @@ public class PlayerAttack : MonoBehaviour
         {
             Death();
         }
+    }
+
+    public void Knock(Vector3 dir)
+    {
+        movement.MoveBlocking();
+        movement.rb.velocity = dir;
+        movement.onWall = false;
+        movement.timeOnWall = movement.timeOnWallMax;
     }
 
     private void Death()
