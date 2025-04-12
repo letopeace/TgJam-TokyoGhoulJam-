@@ -48,7 +48,7 @@ public class SkullBehaviour : BaseEnemy
         Vector3 dir = player.position - transform.position;
         dir.Normalize();
 
-        playerAttack.Damaged(damage);
+        playerAttack.Damaged((int)damage);
         playerAttack.Knock(dir * attackKnocking);
     }
 }

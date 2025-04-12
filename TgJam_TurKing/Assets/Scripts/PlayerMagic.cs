@@ -12,8 +12,14 @@ public class PlayerMagic : MonoBehaviour
     public GameObject magic;
     public Transform[] magicChargeImage;
     public Transform[] magicRecording;
+    public static PlayerMagic instance;
 
     [SerializeField] private Animator animator;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void GetMagicProgress(int amount)
     {
@@ -31,13 +37,13 @@ public class PlayerMagic : MonoBehaviour
     {
         for(int i=0; i< maxCharges; i++)
         {
-            if (i < magicCharges && magicChargeImage[i].localScale != Vector3.one) magicChargeImage[i].DOScale(Vector3.one, 1f).SetEase(Ease.InExpo);
-            else if (i >= magicCharges && magicChargeImage[i].localScale != Vector3.zero) magicChargeImage[i].DOScale(Vector3.zero, 1f).SetEase(Ease.InExpo);
+            if (i < magicCharges && magicChargeImage[i].localScale == Vector3.zero) magicChargeImage[i].DOScale(Vector3.one, 1f).SetEase(Ease.InExpo);
+            else if (i >= magicCharges && magicChargeImage[i].localScale == Vector3.one) magicChargeImage[i].DOScale(Vector3.zero, 1f).SetEase(Ease.InExpo);
         }
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 4; i++)
         {
-            if (i < magicProgress && magicRecording[i].localScale != Vector3.one) magicRecording[i].DOScale(Vector3.one, 1f).SetEase(Ease.InExpo);
-            else if (i >= magicProgress && magicRecording[i].localScale != Vector3.zero) magicRecording[i].DOScale(Vector3.zero, 1f).SetEase(Ease.InExpo);
+            if (i < magicProgress && magicRecording[i].localScale == Vector3.zero) magicRecording[i].DOScale(Vector3.one, 1f).SetEase(Ease.InExpo);
+            else if (i >= magicProgress && magicRecording[i].localScale == Vector3.one) magicRecording[i].DOScale(Vector3.zero, 1f).SetEase(Ease.InExpo);
         }
     }
 

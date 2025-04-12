@@ -901,7 +901,6 @@ GameObject:
   m_Component:
   - component: {fileID: 925972662895859225}
   - component: {fileID: 3704568645985258176}
-  - component: {fileID: 1126265308141703719}
   - component: {fileID: 7466318682923708721}
   m_Layer: 0
   m_Name: Weapon Camera
@@ -976,14 +975,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1126265308141703719
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3143626973175999806}
-  m_Enabled: 1
 --- !u!114 &7466318682923708721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1847,7 +1838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7215346303636693180}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.8600803, z: -0, w: 0.5101587}
+  m_LocalRotation: {x: 0, y: 0.8600794, z: 0, w: 0.5101602}
   m_LocalPosition: {x: -1.15, y: 0, z: -13.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1868,7 +1859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b429bf6fa161f304eb78c2fc07655553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
+  hp: 100
   damage: 20
   attackColdown: 0.3
   microColdown: 0.02
@@ -2001,7 +1992,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 2636362956417767434}
 --- !u!1 &7395487045987112053
 GameObject:
   m_ObjectHideFlags: 0

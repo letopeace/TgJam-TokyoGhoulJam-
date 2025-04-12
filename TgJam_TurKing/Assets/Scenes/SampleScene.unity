@@ -3514,12 +3514,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3176669743188829471 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2636362956417767434, guid: 1ce8f8437cfa8304b9a3a64c50938262,
-    type: 3}
-  m_PrefabInstance: {fileID: 6479429822524135667}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6479429822524135667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3578,16 +3572,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1457561454269594320, guid: 1ce8f8437cfa8304b9a3a64c50938262,
-        type: 3}
-      propertyPath: hp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5117042605985673877, guid: 1ce8f8437cfa8304b9a3a64c50938262,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 3176669743188829471}
     - target: {fileID: 5117042605985673877, guid: 1ce8f8437cfa8304b9a3a64c50938262,
         type: 3}
       propertyPath: magicRecording.Array.data[0]

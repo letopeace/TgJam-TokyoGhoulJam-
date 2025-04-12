@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float hp;
+    public int maxHP;
+    public int hp;
     public float damage;
     public float attackColdown;
     public float microColdown;
@@ -22,6 +24,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] PlayerMovement movement;
     [SerializeField] ParticleSystem particle;
+    [SerializeField] Transform[] hpIcons;
 
 
     private string[] clipNames = { "PlayerAttact1", "PlayerAttact2", "PlayerAttact3" };
@@ -45,6 +48,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (canAttack)
             cdTime += Time.deltaTime;
+        DisplayIcon();
     }
 
     void AnimAttack()
@@ -81,7 +85,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public void Damaged(float damage)
+    public void Damaged(int damage)
     {
         hp -= damage;
         Debug.Log("Damaged, hp: " + hp);
@@ -97,6 +101,15 @@ public class PlayerAttack : MonoBehaviour
         movement.rb.velocity = dir;
         movement.onWall = false;
         movement.timeOnWall = movement.timeOnWallMax;
+    }
+
+    void DisplayIcon()
+    {
+        for(int i = 0; i < maxHP; i++)
+        {
+            if (i < hp) hpIcons[i].DOScale(Vector3.one, 1f);
+            else hpIcons[i].DOScale(Vector3.zero, 1f);
+        }
     }
 
     private void Death()

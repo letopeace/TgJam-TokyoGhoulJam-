@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
-    public float hp = 30, speed = 10, damage = 15, DetectFarDistance = 30, DetectDistance = 10, DetectNearDistance = 3, distance;
+    public float hp = 30, speed = 10, damage = 1, DetectFarDistance = 30, DetectDistance = 10, DetectNearDistance = 3, distance;
     public float shootCd = 3, attackCd = 1.5f, attackKnocking = 2f;
     public Transform player;
     public PlayerAttack playerAttack;
@@ -13,6 +13,7 @@ public class BaseEnemy : MonoBehaviour
     public EnemyState currentState, previousState;
     public GameObject DeadEffect;
     public bool staned = false;
+    public int magicCost;
 
     protected float currentShootCd = 3, currentAttackCd = 1.5f;
 
@@ -56,7 +57,7 @@ public class BaseEnemy : MonoBehaviour
         if (currentShootCd < 0)
         {
             animator.SetTrigger("Shoot");
-            playerAttack.Damaged(damage);
+            playerAttack.Damaged((int)damage);
             currentShootCd = shootCd;
         }
     }
@@ -66,7 +67,7 @@ public class BaseEnemy : MonoBehaviour
         if (currentAttackCd < 0)
         {
             animator.SetTrigger("Attack");
-            playerAttack.Damaged(damage);
+            playerAttack.Damaged((int)damage);
             Knocking();
             currentAttackCd = attackCd;
         }
@@ -105,6 +106,7 @@ public class BaseEnemy : MonoBehaviour
     public void Death()
     {
         //Debug.Log(name + " was Dead!");
+        PlayerMagic.instance.GetMagicProgress(magicCost);
         Instantiate(DeadEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

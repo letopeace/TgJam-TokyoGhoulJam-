@@ -543,6 +543,7 @@ MonoBehaviour:
   DeadEffect: {fileID: 853748313577418337, guid: 413fccb756d549e4588471d1fa00dda2,
     type: 3}
   staned: 0
+  magicCost: 2
 --- !u!135 &659083282783358
 SphereCollider:
   m_ObjectHideFlags: 0
