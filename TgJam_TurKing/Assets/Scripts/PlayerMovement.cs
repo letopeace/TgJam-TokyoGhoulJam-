@@ -115,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
 				timeOnWall = timeOnWallMax;
 				Vector3 dir = wallNormal * 2 + Vector3.up;
 				rb.velocity = dir * jumpForce * 2;
+				wallNormal = Vector3.zero;
 			}
 			else
 			{
@@ -223,7 +224,19 @@ public class PlayerMovement : MonoBehaviour
 	private void OnCollisionExit(Collision collision)
 	{
 		onGround = false;
-		onWall = false;
+
+		if (wallNormal != Vector3.zero)
+		{
+			onWall = false;
+			timeOnWall = timeOnWallMax;
+			Vector3 dir = wallNormal * 2 + Vector3.up;
+			rb.velocity = dir * jumpForce * 2;
+			wallNormal = Vector3.zero;
+		}
+		else if(onWall)
+		{
+			onWall = false;
+		}
 	}
 
 
