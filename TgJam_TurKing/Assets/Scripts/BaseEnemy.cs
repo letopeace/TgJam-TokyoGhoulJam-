@@ -74,7 +74,9 @@ public class BaseEnemy : MonoBehaviour
         Vector3 lookPos = player.position;
         lookPos.y = transform.position.y;
         transform.LookAt(lookPos);
-        rb.velocity = transform.forward * speed * Time.deltaTime;
+        Vector3 move = transform.forward * speed * Time.deltaTime;
+        move.y = rb.velocity.y;
+        rb.velocity = move;
     }
 
     public void Damaged(int damage)
