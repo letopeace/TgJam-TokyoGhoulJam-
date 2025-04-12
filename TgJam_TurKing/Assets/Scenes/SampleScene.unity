@@ -1980,7 +1980,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7756cfa4e356cd340b0eb52a0313059d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1295509679303157621, guid: 7756cfa4e356cd340b0eb52a0313059d,
         type: 3}
@@ -2173,7 +2173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 30
-  speed: 10
+  speed: 1000
   damage: 15
   DetectFarDistance: 40
   DetectDistance: 20
@@ -2186,7 +2186,12 @@ MonoBehaviour:
   playerAttack: {fileID: 1916587072}
   rb: {fileID: 1144332239}
   animator: {fileID: 1144332237}
+<<<<<<< Updated upstream
   DeadEffect: {fileID: 0}
+=======
+  DeadEffect: {fileID: 853748313577418337, guid: 413fccb756d549e4588471d1fa00dda2,
+    type: 3}
+>>>>>>> Stashed changes
 --- !u!95 &1144332237
 Animator:
   serializedVersion: 5
@@ -2482,9 +2487,38 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
+<<<<<<< Updated upstream
     m_Bits: 4294967295
 --- !u!114 &1631131025
 MonoBehaviour:
+=======
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!81 &1540732377
+AudioListener:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2657,8 +2691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dafd44478853e3a45abd16cdada14935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 600
-  jumpForce: 5
+  speed: 800
+  jumpForce: 2
   wallRunClimbSpeed: 5
   maxClimbSpeed: 12
   maxSlideSpeed: 12
