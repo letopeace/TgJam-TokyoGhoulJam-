@@ -178,6 +178,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        onGround = false;
+
         if (collision.collider.tag != "Platform")
         {
             return;
@@ -192,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
                 onGround = true;
                 timeOnWall = timeOnWallMax;
                 wallNormal = Vector3.zero;
+                onWall = false;
             }
             else if (contacts[i].normal.y > -0.66f && !onWall && wallNormal != contacts[i].normal)
             {
@@ -201,12 +204,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-
-        onGround = false;
-        onWall = false;
-    }
-
+    
 }
 
