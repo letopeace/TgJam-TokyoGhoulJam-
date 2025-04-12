@@ -16,30 +16,54 @@ public class PlayerAttack : MonoBehaviour
     public bool isAttacking;
     public int comboNumber;
     public bool canAttack = true;
+    public bool attackQueue = false;
+    private float cdTime;
 
     [SerializeField] Animator anim;
     [SerializeField] PlayerMovement movement;
+    [SerializeField] ParticleSystem particle;
+
 
     private string[] clipNames = { "PlayerAttact1", "PlayerAttact2", "PlayerAttact3" };
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && canAttack) AnimAttack();
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (canAttack)
+            {
+                AnimAttack();
+            }
+            else
+            {
+                attackQueue = true;
+            }
+
+        }
+
+
         if (isAttacking) Attack();
+
+        if (canAttack)
+            cdTime += Time.deltaTime;
     }
 
     void AnimAttack()
     {
+        if (cdTime > 0.1f)
+            comboNumber = 0;
+        cdTime = 0;
+
         RuntimeAnimatorController controller = anim.runtimeAnimatorController;
         float animTime = 0f;
         foreach (var clip in controller.animationClips)
         {
             if (clip.name == clipNames[comboNumber]) animTime = clip.length;
         }
-
-        anim.SetTrigger($"Attack{comboNumber+1}");
-        AttackingTime(0.18f);
+        anim.Play(clipNames[comboNumber]);  
+        
+        AttackingTime(animTime);
         if (comboNumber == 2) AttackColdown(attackColdown + animTime);
-        else AttackColdown(microColdown + animTime);
+        else AttackColdown(animTime);
         comboNumber = (comboNumber + 1) % 3;
     }
 
@@ -83,14 +107,29 @@ public class PlayerAttack : MonoBehaviour
     async Task AttackColdown(float time)
     {
         canAttack = false;
+        particle.Play();
+
         await Task.Delay(Convert.ToInt32(time * 1000f));
+
+        particle.Stop();
         canAttack = true;
+
+
+        if (attackQueue)
+        {
+            attackQueue = false;
+            AnimAttack();
+        }
     }
     async Task AttackingTime(float time)
     {
+        await Task.Delay((int)(time * 1000f * 0.1f));
+
         isAttacking = true;
-        await Task.Delay((int)(time * 1000f));
+        await Task.Delay((int)(time * 1000f * 0.8f));
         isAttacking = false;
+
+        await Task.Delay((int)(time * 1000f * 0.1f));
     }
     void OnDrawGizmos()
     {
