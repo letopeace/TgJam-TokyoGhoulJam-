@@ -24,11 +24,14 @@ public class BaseEnemy : MonoBehaviour
         currentState.Enter(this);
     }
 
-    private void Update()
+    public void Update()
     {
         currentShootCd -= Time.deltaTime;
         currentAttackCd -= Time.deltaTime;
-        currentState.Update(this);
+        if (!staned)
+        {
+            currentState.Update(this);
+        }
     }
 
 
