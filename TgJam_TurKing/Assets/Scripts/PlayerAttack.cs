@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public float hp;
     public float damage;
     public float attackColdown;
     public float microColdown;
@@ -33,6 +34,21 @@ public class PlayerAttack : MonoBehaviour
         if (comboNumber == 2) AttackColdown(attackColdown + animTime);
         else AttackColdown(microColdown + animTime);
         comboNumber = (comboNumber + 1) % 3;
+    }
+
+    public void Damaged(float damage)
+    {
+        hp -= damage;
+        Debug.Log("Damaged, hp: " + hp);
+        if (hp < 0f)
+        {
+            Death();
+        }
+    }
+
+    private void Death()
+    {
+
     }
 
     async Task AttackColdown(float time)
