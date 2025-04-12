@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
@@ -9,10 +10,14 @@ public class PlayerMovement : MonoBehaviour
 
     public float speed = 10f, jumpForce = 1.5f;
     public float wallRunClimbSpeed = 10f, maxClimbSpeed = 10f, maxSlideSpeed = 10f;
+    public float dashForce;
+    public float dashingTime;
+    public float dashColdown;
 
     public bool onGround;
     public bool onWall;
     public bool isBlocked;
+    public bool canDash;
 
 
     public Rigidbody rb;
@@ -20,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     public float timeOnWallMax = 1.5f;
     public float timeOnWall = 1.5f;
 
+
+    private float nowDashingTime = 0f;
+    private Vector3 dashDirection;
 
     private void Awake()
     {
@@ -29,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Jump();
+        Dash();
     }
 
     private void FixedUpdate()
@@ -55,8 +64,8 @@ public class PlayerMovement : MonoBehaviour
         float v = Input.GetAxis("Vertical");
 
         Vector3 dir = Vector3.ClampMagnitude((transform.right * h + transform.forward * v), 1f);
-        dir = dir * speed * Time.fixedDeltaTime;
-        dir.y = rb.velocity.y;
+        dir = dir * Time.fixedDeltaTime * speed  +  dashDirection * dashForce * (nowDashingTime/dashingTime) * (nowDashingTime/dashingTime);
+        if(dir.y == 0f) dir.y = rb.velocity.y;
 
         //rb.velocity = Vector3.Lerp(rb.velocity, dir, 0.1f);
         rb.velocity = dir;
@@ -113,6 +122,21 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    void Dash()
+    {
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 10f);
+        if(canDash && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            float h = Input.GetAxis("Horizontal"), v = Input.GetAxis("Vertical");
+            dashDirection = Vector3.ClampMagnitude((Camera.main.transform.right * h + Camera.main.transform.forward * v), 1f);
+            canDash = false;
+            nowDashingTime = dashingTime;
+            DashColdown();
+        }
+
+        nowDashingTime = Mathf.Clamp(nowDashingTime - Time.deltaTime, 0f, nowDashingTime);
+    }
+
     public void MoveBlocking()
     {
         if (!isBlocked)
@@ -124,6 +148,11 @@ public class PlayerMovement : MonoBehaviour
         isBlocked = true;
         yield return new WaitForSeconds(0.5f);
         isBlocked = false;
+    }
+    async Task DashColdown()
+    {
+        await Task.Delay((int)(dashColdown * 1000f));
+        canDash = true;
     }
 
     private void OnCollisionStay(Collision collision)
