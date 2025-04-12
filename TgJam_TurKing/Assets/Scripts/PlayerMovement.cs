@@ -13,8 +13,11 @@ public class PlayerMovement : MonoBehaviour
     public float dashForce;
     public float dashingTime;
     public float dashColdown;
+    public float slashDistance;
+    public float slashingTime;
 
     public bool onGround;
+    public bool canMove;
     public bool onWall;
     public bool isBlocked;
     public bool canDash;
@@ -68,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         if(dir.y == 0f) dir.y = rb.velocity.y;
 
         //rb.velocity = Vector3.Lerp(rb.velocity, dir, 0.1f);
-        rb.velocity = dir;
+        if(canMove) rb.velocity = dir;
     }
 
     private void MoveOnWall()
@@ -124,17 +127,35 @@ public class PlayerMovement : MonoBehaviour
 
     void Dash()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 10f);
+        float h = Input.GetAxis("Horizontal"), v = Input.GetAxis("Vertical");
+        dashDirection = Vector3.ClampMagnitude((Camera.main.transform.right * h + Camera.main.transform.forward * v), 1f);
+
         if(canDash && Input.GetKeyDown(KeyCode.LeftShift))
         {
-            float h = Input.GetAxis("Horizontal"), v = Input.GetAxis("Vertical");
-            dashDirection = Vector3.ClampMagnitude((Camera.main.transform.right * h + Camera.main.transform.forward * v), 1f);
+            RaycastHit hit;
+            Physics.BoxCast(Camera.main.transform.position, Vector3.one * 0.8f, dashDirection, out hit);
+            if(hit.collider != null && hit.collider.gameObject.GetComponent<BaseEnemy>() != null && hit.distance < slashDistance)
+            {
+                Slash(hit.collider.gameObject);
+                return;
+            }
             canDash = false;
             nowDashingTime = dashingTime;
             DashColdown();
         }
 
         nowDashingTime = Mathf.Clamp(nowDashingTime - Time.deltaTime, 0f, nowDashingTime);
+    }
+
+    async Task Slash(GameObject target)
+    {
+        rb.velocity = (target.transform.position - transform.position).normalized * Vector3.Distance(transform.position, target.transform.position) / slashingTime;
+        canMove = false;
+        GetComponent<PlayerAttack>().isAttacking = true;
+        await Task.Delay((int)(slashingTime * 1000f));
+        rb.velocity = Vector3.zero;
+        canMove = true;
+        GetComponent<PlayerAttack>().isAttacking = false;
     }
 
     public void MoveBlocking()
