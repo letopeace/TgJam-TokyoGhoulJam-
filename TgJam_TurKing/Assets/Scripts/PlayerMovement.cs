@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 projectedView = Vector3.ProjectOnPlane(camForward, wallNormal).normalized;
 
         Vector3 wallRunDirection =
-            Vector3.Dot(projectedView, wallRight) > 0 ? wallRight : wallLeft;
+        Vector3.Dot(projectedView, wallRight) > 0 ? wallRight : wallLeft;
 
 
         float verticalInfluence = Mathf.Clamp(camForward.y, -0.3f, 0.3f);
