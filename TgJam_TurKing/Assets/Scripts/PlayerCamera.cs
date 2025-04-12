@@ -27,4 +27,6 @@ public class PlayerCamera : MonoBehaviour
         playerRot.y = x;
         transform.eulerAngles = playerRot;
     }
+
+    //Camera
 }
