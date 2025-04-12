@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private float nowDashingTime = 0f;
 	private Vector3 dashDirection;
+	[SerializeField] private bool isEverGrounded = true;
 
 	private void Awake()
 	{
@@ -130,8 +131,8 @@ public class PlayerMovement : MonoBehaviour
 	{
 		float h = Input.GetAxis("Horizontal"), v = Input.GetAxis("Vertical");
 		dashDirection = Vector3.ClampMagnitude((Camera.main.transform.right * h + Camera.main.transform.forward * v), 1f);
-
-		if (canDash && Input.GetKeyDown(KeyCode.LeftShift))
+		isEverGrounded = isEverGrounded | OnGround();
+		if (canDash && Input.GetKeyDown(KeyCode.LeftShift) && isEverGrounded)
 		{
 			RaycastHit hit;
 			Physics.BoxCast(Camera.main.transform.position, Vector3.one * 0.8f, dashDirection, out hit);
@@ -142,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
 			}
 			canDash = false;
 			nowDashingTime = dashingTime;
+			isEverGrounded = false;
 			DashColdown();
 		}
 
@@ -237,6 +239,16 @@ public class PlayerMovement : MonoBehaviour
 			onWall = false;
 		}
 	}
-
+	bool OnGround()
+	{
+		Ray ray = new Ray(transform.position, Vector3.down * 0.2f);
+		RaycastHit hit;
+		Physics.Raycast(ray, out hit);
+		if(hit.collider != null && Vector3.Distance(transform.position,hit.point) < 0.2f)
+		{
+			return true;
+		}
+		return false;
+	}
 
 }

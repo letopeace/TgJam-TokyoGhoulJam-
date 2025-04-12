@@ -528,7 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 30
   speed: 10
-  damage: 15
+  damage: 1
   DetectFarDistance: 40
   DetectDistance: 20
   DetectNearDistance: 8

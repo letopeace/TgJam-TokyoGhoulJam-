@@ -1859,7 +1859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b429bf6fa161f304eb78c2fc07655553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  maxHP: 6
+  hp: 6
   damage: 20
   attackColdown: 0.3
   microColdown: 0.02
@@ -1873,6 +1874,13 @@ MonoBehaviour:
   anim: {fileID: 2636362956417767434}
   movement: {fileID: 2878489117200343801}
   particle: {fileID: 4789877079242623701}
+  hpIcons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &2878489117200343801
 MonoBehaviour:
   m_ObjectHideFlags: 0
