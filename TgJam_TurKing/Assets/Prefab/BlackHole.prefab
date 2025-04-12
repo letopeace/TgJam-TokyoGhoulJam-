@@ -19403,3 +19403,6 @@ MonoBehaviour:
   holeForce: 1500
   speed: 4
   lifeTime: 1000
+  exploinDamage: 0
+  exploinParticals: {fileID: 2770708002381450547, guid: e2f884f360a78bc4fb8985793070ee31,
+    type: 3}
