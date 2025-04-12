@@ -439,42 +439,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29610169}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &59014764 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5821244137857906819, guid: 1ce8f8437cfa8304b9a3a64c50938262,
-    type: 3}
-  m_PrefabInstance: {fileID: 1398255124}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &59014771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 59014764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f39dfaaed17ab4408bbca45046d8a38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 800
-  jumpForce: 1.5
-  wallRunClimbSpeed: 10
-  maxClimbSpeed: 10
-  maxSlideSpeed: 10
-  dashForce: 0
-  dashingTime: 0
-  dashColdown: 0
-  slashDistance: 0
-  slashingTime: 0
-  onGround: 0
-  canMove: 0
-  onWall: 0
-  isBlocked: 0
-  canDash: 0
-  rb: {fileID: 0}
-  timeOnWallMax: 1.5
-  timeOnWall: 1.5
 --- !u!1 &63640174
 GameObject:
   m_ObjectHideFlags: 0
@@ -4293,25 +4257,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4663280861273336265, guid: 1ce8f8437cfa8304b9a3a64c50938262,
-        type: 3}
-      propertyPath: movement
-      value: 
-      objectReference: {fileID: 59014771}
     - target: {fileID: 5821244137857906819, guid: 1ce8f8437cfa8304b9a3a64c50938262,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6278738482023967681, guid: 1ce8f8437cfa8304b9a3a64c50938262, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5821244137857906819, guid: 1ce8f8437cfa8304b9a3a64c50938262,
-        type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 59014771}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ce8f8437cfa8304b9a3a64c50938262, type: 3}
 --- !u!1 &1407874396
 GameObject:
