@@ -118,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                Debug.Log("ok");
                 Vector3 dir = Vector3.up * 2;
                 rb.velocity = dir * jumpForce;
             }
