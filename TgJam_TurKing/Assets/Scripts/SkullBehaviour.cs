@@ -31,6 +31,7 @@ public class SkullBehaviour : BaseEnemy
     }
 
 
+
     IEnumerator Attacking()
     {
         animator.SetBool("Taran", true);
@@ -41,4 +42,14 @@ public class SkullBehaviour : BaseEnemy
         animator.SetBool("Taran", false);
         speed *= 0.4f;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Vector3 dir = player.position - transform.position;
+        dir.Normalize();
+
+        playerAttack.Damaged(damage);
+        playerAttack.Knock(dir * attackKnocking);
+    }
 }
+

@@ -12,11 +12,12 @@ public class PlayerMovement : MonoBehaviour
 
     public bool onGround;
     public bool onWall;
+    public bool isBlocked;
 
 
-    private Rigidbody rb;
+    public Rigidbody rb;
     private Vector3 wallNormal;
-    private float timeOnWallMax = 1.5f;
+    public float timeOnWallMax = 1.5f;
     public float timeOnWall = 1.5f;
 
 
@@ -37,6 +38,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void WASD()
     {
+        if (isBlocked)
+        {
+            return;
+        }
+
         if (!onGround && onWall)
         {
             MoveOnWall();
@@ -50,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 dir = Vector3.ClampMagnitude((transform.right * h + transform.forward * v), 1f);
         dir = dir * speed * Time.fixedDeltaTime;
-        dir.y = rb.velocity.y * 1.01f;
+        dir.y = rb.velocity.y;
 
         //rb.velocity = Vector3.Lerp(rb.velocity, dir, 0.1f);
         rb.velocity = dir;
@@ -107,17 +113,32 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void MoveBlocking()
+    {
+        if (!isBlocked)
+            StartCoroutine(Block());
+    }
 
-
-
+    private IEnumerator Block()
+    {
+        isBlocked = true;
+        yield return new WaitForSeconds(0.5f);
+        isBlocked = false;
+    }
 
     private void OnCollisionStay(Collision collision)
     {
         onGround = false;
 
+        if (collision.collider.tag != "Platform")
+        {
+            return;
+        }
+
         ContactPoint[] contacts = collision.contacts;
         for (int i = 0; i < contacts.Length; i++)
         {
+
             if (contacts[i].normal.y > 0.66f && !onGround) 
             {
                 onGround = true;

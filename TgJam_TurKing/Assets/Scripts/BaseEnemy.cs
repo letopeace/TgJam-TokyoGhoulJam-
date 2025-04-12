@@ -5,7 +5,7 @@ using UnityEngine;
 public class BaseEnemy : MonoBehaviour
 {
     public float hp = 30, speed = 10, damage = 15, DetectFarDistance = 30, DetectDistance = 10, DetectNearDistance = 3, distance;
-    public float shootCd = 3, attackCd = 1.5f;
+    public float shootCd = 3, attackCd = 1.5f, attackKnocking = 2f;
     public Transform player;
     public PlayerAttack playerAttack;
     public Rigidbody rb;
@@ -65,8 +65,16 @@ public class BaseEnemy : MonoBehaviour
         {
             animator.SetTrigger("Attack");
             playerAttack.Damaged(damage);
+            Knocking();
             currentAttackCd = attackCd;
         }
+    }
+
+    public void Knocking()
+    {
+        Vector3 dir = player.position - transform.position;
+        dir.Normalize();
+        playerAttack.Knock(dir * attackKnocking);
     }
 
     public virtual void Follow()
