@@ -19,8 +19,6 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] Animator anim;
     [SerializeField] PlayerMovement movement;
-    [SerializeField] ParticleSystem particles;
-
 
     private string[] clipNames = { "PlayerAttact1", "PlayerAttact2", "PlayerAttact3" };
     private void Update()
@@ -85,9 +83,7 @@ public class PlayerAttack : MonoBehaviour
     async Task AttackColdown(float time)
     {
         canAttack = false;
-        particles.Play();
         await Task.Delay(Convert.ToInt32(time * 1000f));
-        particles.Stop();
         canAttack = true;
     }
     async Task AttackingTime(float time)
