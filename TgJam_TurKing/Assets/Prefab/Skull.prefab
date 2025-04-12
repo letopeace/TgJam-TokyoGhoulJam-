@@ -536,7 +536,7 @@ MonoBehaviour:
   shootCd: 3
   attackCd: 2
   attackKnocking: 30
-  player: {fileID: 0}
+  mainCamera: {fileID: 0}
   playerAttack: {fileID: 0}
   rb: {fileID: 1228586841295501787}
   animator: {fileID: 2922680998030732259}
@@ -544,6 +544,8 @@ MonoBehaviour:
     type: 3}
   staned: 0
   magicCost: 2
+  ExplotionEffect: {fileID: 3238330016541306237, guid: 537efc0c779330e43822dc7317ce9779,
+    type: 3}
 --- !u!135 &659083282783358
 SphereCollider:
   m_ObjectHideFlags: 0

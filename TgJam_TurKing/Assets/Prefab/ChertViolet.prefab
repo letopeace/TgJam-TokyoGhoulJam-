@@ -991,7 +991,7 @@ MonoBehaviour:
     type: 3}
   staned: 0
   magicCost: 1
-  minDistance: 0
+  ExplotionEffect: {fileID: 7017568590602439143, guid: a5259c916a06dba43b1b643b1c58ce69,
 --- !u!136 &638319661140670427
 CapsuleCollider:
   m_ObjectHideFlags: 0

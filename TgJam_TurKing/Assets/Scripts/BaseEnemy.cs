@@ -14,6 +14,7 @@ public class BaseEnemy : MonoBehaviour
     public GameObject DeadEffect;
     public bool staned = false;
     public int magicCost;
+    public GameObject ExplotionEffect;
 
     protected float currentShootCd = 3, currentAttackCd = 1.5f;
 
@@ -119,6 +120,7 @@ public class BaseEnemy : MonoBehaviour
     {
         //Debug.Log(name + " was Dead!");
         PlayerMagic.instance.GetMagicProgress(magicCost);
+        Instantiate(ExplotionEffect,transform.position, Quaternion.identity);
         Instantiate(DeadEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
