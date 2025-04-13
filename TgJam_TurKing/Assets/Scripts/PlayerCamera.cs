@@ -14,6 +14,7 @@ public class PlayerCamera : MonoBehaviour
 	private void OnEnable()
 	{
 		sensitivity = PlayerPrefs.GetFloat("Sens", 0.5f) * 2;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	private void Update()
