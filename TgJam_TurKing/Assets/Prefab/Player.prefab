@@ -1882,6 +1882,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  BloodExplotion: {fileID: 853748313577418337, guid: 413fccb756d549e4588471d1fa00dda2,
+    type: 3}
+  GlobleVolume: {fileID: 0}
+  blinkEyes:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &2878489117200343801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1928,6 +1934,7 @@ MonoBehaviour:
   cam: {fileID: 8647584656682474295}
   yMin: -90
   yMax: 90
+  canLook: 1
 --- !u!54 &6475983840476326677
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1994,6 +2001,8 @@ MonoBehaviour:
   magicProgress: 0
   maxCharges: 2
   magic: {fileID: 4679363632474542588, guid: a7ea9dcb46ebca849a1075ace2c59e0f, type: 3}
+  thunderBolt: {fileID: 1795323864201153975, guid: 5bb882ea034132746acf46c9bfb56673,
+    type: 3}
   magicChargeImage:
   - {fileID: 0}
   - {fileID: 0}
