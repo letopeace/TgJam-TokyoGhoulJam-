@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 	private GameObject previousPlatform;
+	private PlayerAttack attack; 
 	private float nowDashingTime = 0f;
 	private Vector3 dashDirection;
 	[SerializeField] private bool isEverGrounded = true;
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
+		attack = GetComponent<PlayerAttack>();
 	}
 
 	private void Update()
@@ -92,12 +94,12 @@ public class PlayerMovement : MonoBehaviour
 		//rb.velocity = Vector3.Lerp(rb.velocity, dir, 0.1f);
 		if (canMove) rb.velocity = dir;
 
-		if(nowStepTime == 0f && h+v != 0f && OnGround())
+		if (nowStepTime == 0f && (h != 0f || v != 0f) && onGround)
 		{
 			stepClip.Play();
 			nowStepTime = stepSpeed / speed;
 		}
-		nowStepTime = Mathf.Max(0f, nowStepTime - Time.deltaTime);
+		nowStepTime = Mathf.Max(0f, nowStepTime - Time.fixedDeltaTime);
 	}
 
 	private void MoveOnWall()
@@ -130,6 +132,14 @@ public class PlayerMovement : MonoBehaviour
 			StartCoroutine(WaitWallNormal());
 		}
 
+
+		if (nowStepTime == 0f && (h != 0f || v != 0f) && onWall)
+		{
+			stepClip.Play();
+			nowStepTime = stepSpeed / speed;
+		}
+		nowStepTime = Mathf.Max(0f, nowStepTime - Time.fixedDeltaTime);
+
 		rb.useGravity = false;
 
 		isEverGrounded = true;
@@ -158,10 +168,12 @@ public class PlayerMovement : MonoBehaviour
 				
 				Vector3 dir = wallNormal * 2 + Vector3.up;
 				rb.velocity = dir * jumpForce * 2;
+				attack.PlayerJump();
 				StartCoroutine(WaitWallNormal());
 			}
 			else
 			{
+				attack.PlayerJump();
 				Vector3 dir = Vector3.up * 2;
 				rb.velocity = dir * jumpForce;
 			}
@@ -174,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
 
 		float h = Input.GetAxis("Horizontal"), v = Input.GetAxis("Vertical");
 		dashDirection = Vector3.ClampMagnitude((Camera.main.transform.right * h + Camera.main.transform.forward * v), 1f);
-		isEverGrounded = isEverGrounded | OnGround();
+		isEverGrounded = isEverGrounded | onGround;
 		if (canDash && Input.GetKeyDown(KeyCode.LeftShift) && isEverGrounded)
 		{
 			dashClip.Play();
@@ -183,7 +195,12 @@ public class PlayerMovement : MonoBehaviour
 			if (hit.collider != null && hit.collider.gameObject.GetComponent<BaseEnemy>() != null && hit.distance < slashDistance)
 			{
 				Slash(hit.collider.gameObject);
+				attack.PlaySlash();
 				return;
+			}
+			else
+			{
+				attack.PlayerJump();
 			}
 			canDash = false;
 			nowDashingTime = dashingTime;
@@ -303,17 +320,6 @@ public class PlayerMovement : MonoBehaviour
 			onWall = false;
 			
 		}
-	}
-	bool OnGround()
-	{
-		Ray ray = new Ray(transform.position, Vector3.down * 0.2f);
-		RaycastHit hit;
-		Physics.Raycast(ray, out hit);
-		if(hit.collider != null && Vector3.Distance(transform.position,hit.point) < 0.2f)
-		{
-			return true;
-		}
-		return false;
 	}
 
 	private bool CompareNormal(Vector3 a, Vector3 b, float toleranceInDegrees = 20f)
