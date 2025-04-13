@@ -2879,6 +2879,7 @@ PrefabInstance:
       propertyPath: hpIcons.Array.data[5]
       value: 
       objectReference: {fileID: 516379919}
+
     - target: {fileID: 1457561454269594320, guid: 1ce8f8437cfa8304b9a3a64c50938262,
         type: 3}
       propertyPath: blinkEyes.Array.data[0]
@@ -2889,9 +2890,7 @@ PrefabInstance:
       propertyPath: blinkEyes.Array.data[1]
       value: 
       objectReference: {fileID: 1167050642}
-    - target: {fileID: 3319912240912372095, guid: 1ce8f8437cfa8304b9a3a64c50938262,
-        type: 3}
-      propertyPath: canLook
+
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5117042605985673877, guid: 1ce8f8437cfa8304b9a3a64c50938262,

@@ -14,4 +14,9 @@ public class ChertBehaviour : BaseEnemy
             return;
         base.Follow();
     }
+
+	public override void Shoot()
+	{
+		
+	}
 }

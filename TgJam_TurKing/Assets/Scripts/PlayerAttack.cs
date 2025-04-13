@@ -90,8 +90,14 @@ public class PlayerAttack : MonoBehaviour
                 float boost = (speed - 15) * 0.5f;
 				boost = (boost / (1 + Mathf.Abs(boost))) * damageIncrease; 
 				hit[i].gameObject.GetComponent<BaseEnemy>().Damaged((int)(damage + boost));
-                isAttacking = false;
+                
             }
+            if (hit[i] != null && hit[i].gameObject.GetComponent<FireBallBehaviour>() != null)
+            {
+                FireBallBehaviour fireBall = hit[i].gameObject.GetComponent<FireBallBehaviour>();
+
+                fireBall.Reflection(Camera.main.transform.forward);
+			}
         }
     }
 
