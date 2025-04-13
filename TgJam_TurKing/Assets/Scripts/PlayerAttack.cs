@@ -23,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     public int comboNumber;
     public bool canAttack = true;
     public bool attackQueue = false;
+    public float KillerHeight;
+
     private float cdTime;
 
     [SerializeField] Animator anim;
@@ -33,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject GlobleVolume;
     [SerializeField] Transform[] blinkEyes;
     private bool isDead = false;
+    
 
     private string[] clipNames = { "PlayerAttact1", "PlayerAttact2", "PlayerAttact3" };
     private void Update()
@@ -55,6 +58,11 @@ public class PlayerAttack : MonoBehaviour
         if (canAttack)
             cdTime += Time.deltaTime;
         DisplayIcon();
+
+        if(transform.position.y < KillerHeight)
+        {
+            Death();
+        }
     }
 
     void AnimAttack()
@@ -153,6 +161,7 @@ public class PlayerAttack : MonoBehaviour
         Camera.main.transform.DOLocalRotate(Camera.main.transform.eulerAngles + Vector3.forward * 20f, 1.2f).SetEase(Ease.OutElastic);
         blinkEyes[0].DOMoveY(400f, 1.8f);
         blinkEyes[1].DOMoveY(400f, 1.9f).OnComplete(reStartScene);
+        
 
     }
 

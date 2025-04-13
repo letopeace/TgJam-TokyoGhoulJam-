@@ -82,6 +82,8 @@ public class PlayerMovement : MonoBehaviour
 
 		rb.useGravity = false;
 
+		onGround = true;
+
 		Vector3 wallRight = Vector3.Cross(Vector3.up, wallNormal).normalized;
 		Vector3 wallLeft = -wallRight;
 
