@@ -1033,7 +1033,7 @@ MonoBehaviour:
   - {fileID: 9200905617379787134, guid: 9dbed2d8b5a2f8340b32ec2c8aa48248, type: 3}
   - {fileID: 5734956239670270626, guid: 589ca0bb5c1d3264b9d6e1bcbb918c75, type: 3}
   minColdown: 350
-  maxColdown: 2000
+  maxColdown: 800
   Timer: 90
   text: {fileID: 1624766749}
   player: {fileID: 0}

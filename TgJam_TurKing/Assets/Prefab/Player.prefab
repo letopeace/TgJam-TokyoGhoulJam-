@@ -6917,7 +6917,7 @@ MonoBehaviour:
   canAttack: 1
   attackQueue: 0
   KillerHeight: -40
-  maxBloodBank: 2
+  maxBloodBank: 5
   currentBlood: 0
   anim: {fileID: 2636362956417767434}
   movement: {fileID: 2878489117200343801}
