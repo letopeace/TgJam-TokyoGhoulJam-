@@ -40,7 +40,7 @@ public class PlayerMagic : MonoBehaviour
     {
         for(int i=0; i< maxCharges; i++)
         {
-            if (i < magicCharges && magicChargeImage[i].localScale == Vector3.zero) magicChargeImage[i].DOScale(Vector3.one, 1f).SetEase(Ease.InExpo);
+            if (i < magicCharges && magicChargeImage[i].localScale == Vector3.zero) magicChargeImage[i].DOScale(Vector3.one, 1f).SetEase(Ease.InExpo);      
             else if (i >= magicCharges && magicChargeImage[i].localScale == Vector3.one) magicChargeImage[i].DOScale(Vector3.zero, 1f).SetEase(Ease.InExpo);
         }
         for(int i = 0; i < 4; i++)

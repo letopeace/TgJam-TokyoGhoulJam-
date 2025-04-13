@@ -16,6 +16,7 @@ public class FinalArena : MonoBehaviour
 
     public float Timer;
     public GameObject text;
+    public Transform player;
 
     bool isStarted;
 
@@ -25,7 +26,8 @@ public class FinalArena : MonoBehaviour
     {
         if(collision != null && collision.gameObject != null && collision.gameObject.tag == "Player")
         {
-            isStarted = true;
+            player = collision.collider.transform;
+			isStarted = true;
             text.transform.DOScale(Vector3.one, 1f);
             StartTrail();
         }  
@@ -58,7 +60,9 @@ public class FinalArena : MonoBehaviour
 
         if (isStarted)
         {
-            GameObject moster = Instantiate(Enemies[Random.Range(0, Enemies.Length)], point[Random.Range(0, point.Length)].position, Quaternion.identity);
+            Vector3 pos = Vector3.Lerp(point[Random.Range(0, point.Length)].position, player.position, 0.5f);
+
+			GameObject moster = Instantiate(Enemies[Random.Range(0, Enemies.Length)], pos, Quaternion.identity);
 
             AllMosters.Add(moster);
         }
