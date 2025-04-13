@@ -10,6 +10,7 @@ public class FioletovyiChert : BaseEnemy
 
 	private float rayDistance = 4f;
 	private bool isShooting = false;
+	private bool detected = false;
 
 	private void Awake()
 	{
@@ -33,6 +34,10 @@ public class FioletovyiChert : BaseEnemy
 
 			if (!staned) rb.velocity = transform.forward * speed * Time.deltaTime;
 		}
+		else
+		{
+			Shoot();
+		}
 	}
 
 	public override void Shoot()
@@ -47,6 +52,8 @@ public class FioletovyiChert : BaseEnemy
 
 	private bool PlatformDetect()
 	{
+		if (detected) return false;
+
 		Ray ray = new Ray(transform.position + Vector3.up * 1.5f, transform.forward + Vector3.down);
 		RaycastHit hit;
 
@@ -56,6 +63,7 @@ public class FioletovyiChert : BaseEnemy
 		}
 		else
 		{
+			detected = true;
 			return false;
 		}
 	}
