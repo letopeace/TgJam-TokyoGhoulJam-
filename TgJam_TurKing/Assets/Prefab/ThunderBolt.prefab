@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec29797834af71438f77aa958f775ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 45
   maxReflectNumber: 12
   damage: 15
   damagePerReflect: 5

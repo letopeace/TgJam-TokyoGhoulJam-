@@ -33,7 +33,11 @@ public class PlayerMovement : MonoBehaviour
 	private float nowDashingTime = 0f;
 	private Vector3 dashDirection;
 	[SerializeField] private bool isEverGrounded = true;
+	[SerializeField] private AudioSource dashClip;
+	[SerializeField] readonly AudioSource stepClip;
+	[SerializeField] private AudioSource stepSpeed;
 
+	private float nowStepTime=0f;
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -87,6 +91,12 @@ public class PlayerMovement : MonoBehaviour
 
 		//rb.velocity = Vector3.Lerp(rb.velocity, dir, 0.1f);
 		if (canMove) rb.velocity = dir;
+
+		if(nowStepTime == 0f && h+v != 0f)
+		{
+			stepClip.Play();
+			nowStepTime = stepSpeed / speed;
+		}
 	}
 
 	private void MoveOnWall()
@@ -160,11 +170,13 @@ public class PlayerMovement : MonoBehaviour
 
 	void Dash()
 	{
+
 		float h = Input.GetAxis("Horizontal"), v = Input.GetAxis("Vertical");
 		dashDirection = Vector3.ClampMagnitude((Camera.main.transform.right * h + Camera.main.transform.forward * v), 1f);
 		isEverGrounded = isEverGrounded | OnGround();
 		if (canDash && Input.GetKeyDown(KeyCode.LeftShift) && isEverGrounded)
 		{
+			dashClip.Play();
 			RaycastHit hit;
 			Physics.BoxCast(Camera.main.transform.position, Vector3.one * 0.8f, dashDirection, out hit);
 			if (hit.collider != null && hit.collider.gameObject.GetComponent<BaseEnemy>() != null && hit.distance < slashDistance)

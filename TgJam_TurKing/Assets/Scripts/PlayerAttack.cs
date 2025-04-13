@@ -59,7 +59,7 @@ public class PlayerAttack : MonoBehaviour
             cdTime += Time.deltaTime;
         DisplayIcon();
 
-        if(transform.position.y < KillerHeight)
+        if(transform.position.y < KillerHeight && !isDead)
         {
             Death();
         }
