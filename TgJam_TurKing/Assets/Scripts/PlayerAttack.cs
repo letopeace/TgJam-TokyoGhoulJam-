@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] PlayerMovement movement;
     [SerializeField] ParticleSystem particle;
     [SerializeField] Transform[] hpIcons;
+    [SerializeField] GameObject BloodExplotion;
 
 
     private string[] clipNames = { "PlayerAttact1", "PlayerAttact2", "PlayerAttact3" };

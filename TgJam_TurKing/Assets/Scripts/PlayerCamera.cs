@@ -6,6 +6,7 @@ public class PlayerCamera : MonoBehaviour
 {
     public GameObject cam;
     public float yMin = -90, yMax = 90;
+    public bool canLook;
 
     private float x, y;
 
@@ -21,11 +22,11 @@ public class PlayerCamera : MonoBehaviour
 
         Vector3 camRot = cam.transform.eulerAngles;
         camRot.x = Mathf.Clamp(-y, yMin, yMax);
-        cam.transform.eulerAngles = camRot;
+        if(canLook) cam.transform.eulerAngles = camRot;
 
         Vector3 playerRot = transform.eulerAngles;
         playerRot.y = x;
-        transform.eulerAngles = playerRot;
+        if(canLook) transform.eulerAngles = playerRot;
     }
 
     //Camera

@@ -19402,8 +19402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 12
   internalRaduis: 0.5
-  holeForce: 1500
-  speed: 12
+  holeForce: 1600
+  speed: 15
   lifeTime: 1000
   exploinDamage: 100
   exploinParticals: {fileID: 2770708002381450547, guid: e2f884f360a78bc4fb8985793070ee31,
