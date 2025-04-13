@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
 	public float timeOnWall = 1.5f;
 
 
+	private GameObject previousPlatform;
 	private float nowDashingTime = 0f;
 	private Vector3 dashDirection;
 	[SerializeField] private bool isEverGrounded = true;
@@ -42,6 +43,19 @@ public class PlayerMovement : MonoBehaviour
 	{
 		Jump();
 		Dash();
+
+		if (onWall)
+		{
+			timeOnWall -= Time.deltaTime;
+
+			timeOnWall = Mathf.Max(timeOnWall, -0.1f);
+		}
+		else
+		{
+			timeOnWall += Time.deltaTime;
+
+			timeOnWall = Mathf.Min(timeOnWall, timeOnWallMax);
+		}
 	}
 
 	private void FixedUpdate()
@@ -80,9 +94,11 @@ public class PlayerMovement : MonoBehaviour
 		if (!onWall)
 		{ return; }
 
-		rb.useGravity = false;
+		float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxis("Vertical");
 
-		isEverGrounded = true;
+		Vector3 playerDir = transform.right * h + transform.forward * v;
+
 
 		Vector3 wallRight = Vector3.Cross(Vector3.up, wallNormal).normalized;
 		Vector3 wallLeft = -wallRight;
@@ -93,6 +109,19 @@ public class PlayerMovement : MonoBehaviour
 		Vector3 wallRunDirection =
 		Vector3.Dot(projectedView, wallRight) > 0 ? wallRight : wallLeft;
 
+		Debug.Log("!CompareNormal(wallRunDirection, playerDir, 180): " + !CompareNormal(wallRunDirection, playerDir, 180));
+		Debug.Log("CompareNormal(playerDir, wallNormal, 20): " + CompareNormal(playerDir, wallNormal, 20));
+		Debug.Log("playerDir == Vector3.zero: " + (playerDir == Vector3.zero));
+
+		if (!CompareNormal(wallRunDirection, playerDir, 180) || CompareNormal(playerDir, wallNormal, 45) || playerDir == Vector3.zero || Input.GetAxis("Vertical") < 0)
+		{
+			onWall = false;
+			StartCoroutine(WaitWallNormal());
+		}
+
+		rb.useGravity = false;
+
+		isEverGrounded = true;
 
 		float verticalInfluence = Mathf.Clamp(camForward.y, -0.3f, 0.3f);
 		if (timeOnWall < 0)
@@ -105,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
 
 		rb.velocity = finalVelocity;
 
-		timeOnWall -= Time.deltaTime;
+		
 	}
 
 	private void Jump()
@@ -115,10 +144,10 @@ public class PlayerMovement : MonoBehaviour
 			if (onWall)
 			{
 				onWall = false;
-				timeOnWall = timeOnWallMax;
+				
 				Vector3 dir = wallNormal * 2 + Vector3.up;
 				rb.velocity = dir * jumpForce * 2;
-				wallNormal = Vector3.zero;
+				StartCoroutine(WaitWallNormal());
 			}
 			else
 			{
@@ -192,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
 		ContactPoint[] contacts = collision.contacts;
 		if (contacts.Length == 0)
 		{
-			onGround = false;
+			StartCoroutine(WaitGround());
 			onWall = false;
 		}
 
@@ -202,23 +231,43 @@ public class PlayerMovement : MonoBehaviour
 			if (contacts[i].normal.y > 0.66f)
 			{
 				onGround = true;
-				timeOnWall = timeOnWallMax;
+				previousPlatform = null;
+				
 				wallNormal = Vector3.zero;
 				onWall = false;
 				return;
 			}
 			else if (contacts[i].normal.y > -0.66f && contacts[i].normal.y < 0.66f)
 			{
-				if (!onWall && wallNormal != contacts[i].normal)
+				if (!onWall && (wallNormal == Vector3.zero || !CompareNormal(wallNormal, contacts[i].normal)))
 				{
-					onWall = true;
-					wallNormal = contacts[i].normal;
+					float h = Input.GetAxis("Horizontal");
+					float v = Input.GetAxis("Vertical");
+
+					Vector3 playerDir = transform.right * h + transform.forward * v;
+
+					if ( playerDir == Vector3.zero || Input.GetAxis("Vertical") < 0 || previousPlatform == collision.gameObject)
+					{
+						
+					}
+					else
+					{
+						onWall = true;
+						wallNormal = contacts[i].normal;
+						previousPlatform = collision.gameObject; 
+					}
 				}
+				else if (wallNormal != contacts[i].normal && onWall) 
+				{
+
+					wallNormal = contacts[i].normal; 
+				}
+
 				return;
 			}
 			else
 			{
-				onGround = false;
+				StartCoroutine(WaitGround());
 				onWall = false;
 			}
 		}
@@ -226,19 +275,20 @@ public class PlayerMovement : MonoBehaviour
 
 	private void OnCollisionExit(Collision collision)
 	{
-		onGround = false;
+		StartCoroutine(WaitGround());
 
 		if (wallNormal != Vector3.zero)
 		{
 			onWall = false;
-			timeOnWall = timeOnWallMax;
+			
 			Vector3 dir = wallNormal * 2 + Vector3.up;
 			rb.velocity = dir * jumpForce * 2;
-			wallNormal = Vector3.zero;
+			StartCoroutine(WaitWallNormal());
 		}
 		else if(onWall)
 		{
 			onWall = false;
+			
 		}
 	}
 	bool OnGround()
@@ -253,4 +303,22 @@ public class PlayerMovement : MonoBehaviour
 		return false;
 	}
 
+	private bool CompareNormal(Vector3 a, Vector3 b, float toleranceInDegrees = 20f)
+	{
+		float angle = Vector3.Angle(a.normalized, b.normalized);
+		return angle <= toleranceInDegrees;
+	}
+
+
+	IEnumerator WaitWallNormal()
+	{
+		yield return new WaitForSeconds(0.1f);
+		wallNormal = Vector3.zero;
+	}
+
+	IEnumerator WaitGround()
+	{
+		yield return new WaitForSeconds(0.1f);
+		onGround = false;
+	}
 }
