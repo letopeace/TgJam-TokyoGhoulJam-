@@ -34,8 +34,8 @@ public class PlayerMovement : MonoBehaviour
 	private Vector3 dashDirection;
 	[SerializeField] private bool isEverGrounded = true;
 	[SerializeField] private AudioSource dashClip;
-	[SerializeField] readonly AudioSource stepClip;
-	[SerializeField] private AudioSource stepSpeed;
+	[SerializeField] private AudioSource stepClip;
+	[SerializeField] private float stepSpeed;
 
 	private float nowStepTime=0f;
 	private void Awake()
@@ -97,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
 			stepClip.Play();
 			nowStepTime = stepSpeed / speed;
 		}
+		nowStepTime = Mathf.Max(0f, nowStepTime - Time.deltaTime);
 	}
 
 	private void MoveOnWall()
