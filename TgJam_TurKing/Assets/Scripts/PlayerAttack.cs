@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -27,7 +30,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] ParticleSystem particle;
     [SerializeField] Transform[] hpIcons;
     [SerializeField] GameObject BloodExplotion;
-
+    [SerializeField] GameObject GlobleVolume;
+    [SerializeField] Transform[] blinkEyes;
+    private bool isDead = false;
 
     private string[] clipNames = { "PlayerAttact1", "PlayerAttact2", "PlayerAttact3" };
     private void Update()
@@ -93,10 +98,18 @@ public class PlayerAttack : MonoBehaviour
     public void Damaged(int damage)
     {
         hp -= damage;
-        if (hp < 0f)
+        if (hp < 0f && !isDead)
         {
             Death();
+            return;
         }
+        Vignette vignette;
+        GlobleVolume.GetComponent<Volume>().profile.TryGet(out vignette);
+        float current = vignette.intensity.value;
+        Tween vignetteTween = DOTween.To(() => current, x => {
+            current = x;
+            vignette.intensity.value = current;
+        }, 0.20f, 0.5f).SetLoops(2, LoopType.Yoyo);
     }
 
     public void Knock(Vector3 dir)
@@ -118,7 +131,28 @@ public class PlayerAttack : MonoBehaviour
 
     private void Death()
     {
+        isDead = true;
+        GetComponent<PlayerMovement>().canMove = false;
+        GetComponent<PlayerMovement>().canDash = false;
+        GetComponent<PlayerCamera>().canLook = false;
+        Vignette vignette;
+        GlobleVolume.GetComponent<Volume>().profile.TryGet(out vignette);
+        float current = vignette.intensity.value;
+        Tween vignetteTween = DOTween.To(() => current, x => {
+            current = x;
+            vignette.intensity.value = current;
+        }, 0.35f, 0.6f).SetLoops(2,LoopType.Yoyo);
 
+        Instantiate(BloodExplotion, transform.position, Quaternion.identity);
+        Camera.main.transform.DOLocalRotate(Camera.main.transform.eulerAngles + Vector3.forward * 20f, 1.2f).SetEase(Ease.OutElastic);
+        blinkEyes[0].DOMoveY(400f, 1.8f);
+        blinkEyes[1].DOMoveY(400f, 1.9f).OnComplete(reStartScene);
+
+    }
+
+    void reStartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     async Task AttackColdown(float time)
