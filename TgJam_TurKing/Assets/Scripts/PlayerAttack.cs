@@ -23,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     public bool canAttack = true;
     public bool attackQueue = false;
     public float KillerHeight;
+    public int maxBloodBank;
+    public int currentBlood;
 
     private float cdTime;
 
@@ -179,6 +181,17 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
+
+    public void GetBlood()
+    {
+        currentBlood++;
+        if(hp != maxHP && currentBlood > maxBloodBank)
+        {
+            hp++;
+            currentBlood -= maxBloodBank;
+        }
+    }
+    
     void reStartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

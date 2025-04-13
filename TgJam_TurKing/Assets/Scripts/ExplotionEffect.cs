@@ -10,6 +10,13 @@ public class ExplotionEffect : MonoBehaviour
     {
         ParticleSystem ps = GetComponent<ParticleSystem>();
 
+        if(other != null && other.gameObject.GetComponent<PlayerMovement>()!= null)
+        {
+            other.gameObject.GetComponent<PlayerAttack>().GetBlood();
+            Debug.Log("ok");
+            return;
+        }
+
         List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
         int eventCount = ps.GetCollisionEvents(other, collisionEvents);
         for (int i = 0; i < eventCount; i++)

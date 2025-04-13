@@ -995,7 +995,7 @@ MonoBehaviour:
   DeadEffect: {fileID: 853748313577418337, guid: 413fccb756d549e4588471d1fa00dda2,
     type: 3}
   staned: 0
-  magicCost: 0
+  magicCost: 1
   ExplotionEffect: {fileID: 8114023047016664247, guid: c3ee8633e9082cb42a0e26eade602a3d,
     type: 3}
   minDistance: 3

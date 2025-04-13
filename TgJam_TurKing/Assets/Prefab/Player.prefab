@@ -1831,7 +1831,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6137233736603670395}
   serializedVersion: 8
-  lengthInSec: 0.2
+  lengthInSec: 0.18
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -1959,8 +1959,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 200
-      minScalar: 150
+      scalar: 250
+      minScalar: 200
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5860,7 +5860,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     widthOverTrail:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 2
       scalar: 33
       minScalar: 1
       maxCurve:
@@ -5900,8 +5900,17 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 1
+          time: 0.006122589
+          value: 0
+          inSlope: 1.3844757
+          outSlope: 1.3844757
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.41496378
+        - serializedVersion: 3
+          time: 0.45600605
+          value: 0.38153824
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -5910,12 +5919,12 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
+          value: 0
+          inSlope: -1.0558451
+          outSlope: -1.0558451
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.36427587
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -6908,6 +6917,8 @@ MonoBehaviour:
   canAttack: 1
   attackQueue: 0
   KillerHeight: -40
+  maxBloodBank: 2
+  currentBlood: 0
   anim: {fileID: 2636362956417767434}
   movement: {fileID: 2878489117200343801}
   particle: {fileID: 4789877079242623701}

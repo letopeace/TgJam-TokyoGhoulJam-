@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SkullBehaviour : BaseEnemy
 {
+
+    private bool isTaran = false;
+
     private void Awake()
     {
         rb.useGravity = false;
@@ -26,7 +29,7 @@ public class SkullBehaviour : BaseEnemy
 
     public override void Follow()
     {
-        transform.LookAt(mainCamera.position, Vector3.up);
+        if (!isTaran) transform.LookAt(mainCamera.position);
         if(!staned) rb.velocity = transform.forward * speed * Time.deltaTime;
     }
 
@@ -34,6 +37,7 @@ public class SkullBehaviour : BaseEnemy
 
     IEnumerator Attacking()
     {
+        isTaran = true;
         animator.SetBool("Taran", true);
         speed *= 2.5f;
 
@@ -41,6 +45,7 @@ public class SkullBehaviour : BaseEnemy
 
         animator.SetBool("Taran", false);
         speed *= 0.4f;
+        isTaran = false;
     }
 
     private void OnCollisionEnter(Collision collision)
