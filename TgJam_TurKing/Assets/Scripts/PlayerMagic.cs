@@ -10,11 +10,14 @@ public class PlayerMagic : MonoBehaviour
     public int magicProgress;
     public int maxCharges;
     public GameObject magic;
+    public GameObject thunderBolt;
     public Transform[] magicChargeImage;
     public Transform[] magicRecording;
     public static PlayerMagic instance;
 
     [SerializeField] private Animator animator;
+
+    private GameObject selectedMagic;
 
     private void Awake()
     {
@@ -49,7 +52,16 @@ public class PlayerMagic : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1)) AnimMagic();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            AnimMagic();
+            selectedMagic = magic;
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            AnimMagic();
+            selectedMagic = thunderBolt;
+        }
         DisplayIcon();
     }
     void AnimMagic()
@@ -63,6 +75,6 @@ public class PlayerMagic : MonoBehaviour
 
     public void UseMagic()
     {
-        Instantiate(magic, Camera.main.transform.position,Quaternion.identity);
+        Instantiate(selectedMagic, Camera.main.transform.position, Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up));
     }
 }

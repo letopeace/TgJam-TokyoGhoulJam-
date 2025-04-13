@@ -14,7 +14,7 @@ public class BlackHole : MonoBehaviour
     public GameObject exploinParticals;
     private void Update()
     {
-        transform.Translate(transform.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         Collider[] coliders = Physics.OverlapSphere(transform.position, radius);
 
