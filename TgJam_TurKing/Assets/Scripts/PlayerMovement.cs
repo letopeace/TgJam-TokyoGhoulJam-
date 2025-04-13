@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
 		//rb.velocity = Vector3.Lerp(rb.velocity, dir, 0.1f);
 		if (canMove) rb.velocity = dir;
 
-		if(nowStepTime == 0f && h+v != 0f)
+		if(nowStepTime == 0f && h+v != 0f && OnGround())
 		{
 			stepClip.Play();
 			nowStepTime = stepSpeed / speed;

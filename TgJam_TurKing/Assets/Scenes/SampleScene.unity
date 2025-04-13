@@ -1692,11 +1692,6 @@ PrefabInstance:
       objectReference: {fileID: 832575517}
     - target: {fileID: 1457561454269594320, guid: 1ce8f8437cfa8304b9a3a64c50938262,
         type: 3}
-      propertyPath: KillerHeight
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457561454269594320, guid: 1ce8f8437cfa8304b9a3a64c50938262,
-        type: 3}
       propertyPath: hpIcons.Array.data[0]
       value: 
       objectReference: {fileID: 324356600}
@@ -1735,6 +1730,11 @@ PrefabInstance:
       propertyPath: blinkEyes.Array.data[1]
       value: 
       objectReference: {fileID: 1167050642}
+    - target: {fileID: 2878489117200343801, guid: 1ce8f8437cfa8304b9a3a64c50938262,
+        type: 3}
+      propertyPath: speed
+      value: 900
+      objectReference: {fileID: 0}
     - target: {fileID: 5117042605985673877, guid: 1ce8f8437cfa8304b9a3a64c50938262,
         type: 3}
       propertyPath: magicRecording.Array.data[0]
