@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -34,6 +33,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject BloodExplotion;
     [SerializeField] GameObject GlobleVolume;
     [SerializeField] Transform[] blinkEyes;
+    [SerializeField] AudioClip[] attackClip;
     private bool isDead = false;
     
 
@@ -78,8 +78,11 @@ public class PlayerAttack : MonoBehaviour
         {
             if (clip.name == clipNames[comboNumber]) animTime = clip.length;
         }
-        anim.Play(clipNames[comboNumber]);  
-        
+        anim.Play(clipNames[comboNumber]);
+
+        GetComponent<AudioSource>().clip = attackClip[Random.Range(0, attackClip.Length)];
+        GetComponent<AudioSource>().Play();
+
         AttackingTime(animTime);
         if (comboNumber == 2) AttackColdown(attackColdown + animTime);
         else AttackColdown(animTime);
@@ -175,7 +178,7 @@ public class PlayerAttack : MonoBehaviour
         canAttack = false;
         particle.Play();
 
-        await Task.Delay(Convert.ToInt32(time * 1000f));
+        await Task.Delay((int)(time * 1000f));
 
         particle.Stop();
         canAttack = true;
