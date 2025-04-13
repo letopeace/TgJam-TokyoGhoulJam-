@@ -13,7 +13,7 @@ public class ExplotionEffect : MonoBehaviour
         if(other != null && other.gameObject.GetComponent<PlayerMovement>()!= null)
         {
             other.gameObject.GetComponent<PlayerAttack>().GetBlood();
-            Debug.Log("ok");
+            Debug.Log("ok");    
             return;
         }
 
