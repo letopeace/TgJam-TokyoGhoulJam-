@@ -21,7 +21,7 @@ public class PlayerControlMenu : MonoBehaviour
         yy = Input.GetAxis("Vertical");
 
         float gravity = rb.velocity.y;
-        rb.velocity = (transform.right * xx + transform.forward * yy).normalized * speed * Time.deltaTime;
+        rb.velocity = (transform.right * xx + transform.forward * yy).normalized * speed;
         rb.velocity += gravity * Vector3.up;
 
         float x=0, y = 0;

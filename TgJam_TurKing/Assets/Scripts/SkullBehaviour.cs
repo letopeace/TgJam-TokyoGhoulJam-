@@ -45,11 +45,14 @@ public class SkullBehaviour : BaseEnemy
 
     private void OnCollisionEnter(Collision collision)
     {
-        Vector3 dir = mainCamera.position - transform.position;
-        dir.Normalize();
+        if (collision.collider.tag == "Player")
+        {
+            Vector3 dir = mainCamera.position - transform.position;
+            dir.Normalize();
 
-        playerAttack.Damaged((int)damage);
-        playerAttack.Knock(dir * attackKnocking);
+            playerAttack.Damaged((int)damage);
+            playerAttack.Knock(dir * attackKnocking);
+        }
     }
 }
 

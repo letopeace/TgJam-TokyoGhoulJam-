@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private AudioSource dashClip;
 	[SerializeField] private AudioSource stepClip;
 	[SerializeField] private float stepSpeed;
+	[SerializeField] private ParticleSystem actionLine;
 
 	private float nowStepTime=0f;
 	private void Awake()
@@ -213,6 +214,7 @@ public class PlayerMovement : MonoBehaviour
 
 	async Task Slash(GameObject target)
 	{
+		actionLine.Play();
 		rb.velocity = (target.transform.position - transform.position).normalized * Vector3.Distance(transform.position, target.transform.position) / slashingTime;
 		canMove = false;
 		GetComponent<PlayerAttack>().isAttacking = true;

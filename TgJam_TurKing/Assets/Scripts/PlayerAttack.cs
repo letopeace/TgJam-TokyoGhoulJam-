@@ -115,7 +115,7 @@ public class PlayerAttack : MonoBehaviour
     public void Damaged(int damage)
     {
         hp -= damage;
-        if (hp < 0f && !isDead)
+        if (hp <= 0f && !isDead)
         {
             Death();
             return;

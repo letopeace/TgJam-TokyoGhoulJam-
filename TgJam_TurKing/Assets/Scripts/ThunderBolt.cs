@@ -12,6 +12,7 @@ public class ThunderBolt : MonoBehaviour
     public float decriseRadiusPerReflect;
     public GameObject thunderChain;
     public float livetime;
+    [SerializeField] AudioClip thunderclip;
     private bool wondering = true;
     private int reflectNumber = 0;
     private void Update()
@@ -22,7 +23,13 @@ public class ThunderBolt : MonoBehaviour
         {
             if (coliders[i] != null && coliders[i].gameObject.GetComponent<BaseEnemy>())
             {
-                if(wondering) wondering = false;
+                if (wondering)
+                {
+                    wondering = false;
+                    GetComponent<AudioSource>().clip = thunderclip;
+                    GetComponent<AudioSource>().Play();
+
+                }
                 isReflected = true;
                 Reflect(coliders[i]);
             }
