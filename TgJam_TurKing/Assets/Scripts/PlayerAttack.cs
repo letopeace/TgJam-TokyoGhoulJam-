@@ -137,6 +137,17 @@ public class PlayerAttack : MonoBehaviour
         movement.timeOnWall = movement.timeOnWallMax;
     }
 
+    public void PlaySlash()
+    {
+        anim.Play("Slash");
+    }
+
+    public void PlayerJump()
+    {
+        Debug.Log("Jumped");
+		anim.Play("Jump");
+	}
+
     void DisplayIcon()
     {
         for(int i = 0; i < maxHP; i++)

@@ -1687,6 +1687,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1457561454269594320, guid: 1ce8f8437cfa8304b9a3a64c50938262,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457561454269594320, guid: 1ce8f8437cfa8304b9a3a64c50938262,
+        type: 3}
       propertyPath: GlobleVolume
       value: 
       objectReference: {fileID: 832575517}
@@ -1847,6 +1852,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ChertViolet (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200905617379787134, guid: 9dbed2d8b5a2f8340b32ec2c8aa48248,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2215,6 +2225,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChertViolet (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9200905617379787134, guid: 9dbed2d8b5a2f8340b32ec2c8aa48248,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2293,6 +2308,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChertViolet (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9200905617379787134, guid: 9dbed2d8b5a2f8340b32ec2c8aa48248,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2370,6 +2390,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ChertViolet (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200905617379787134, guid: 9dbed2d8b5a2f8340b32ec2c8aa48248,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2559,6 +2584,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ChertViolet (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200905617379787134, guid: 9dbed2d8b5a2f8340b32ec2c8aa48248,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2894,6 +2924,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChertViolet (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 9200905617379787134, guid: 9dbed2d8b5a2f8340b32ec2c8aa48248,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2971,6 +3006,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ChertViolet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200905617379787134, guid: 9dbed2d8b5a2f8340b32ec2c8aa48248,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
